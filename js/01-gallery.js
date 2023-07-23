@@ -25,8 +25,6 @@ const markup = galleryItems
 galleryList.insertAdjacentHTML("beforeend", markup);
 
 
-
-
 //додали обробник події на клик по ul
 galleryList.addEventListener('click', handleClick);
 
