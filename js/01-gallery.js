@@ -5,13 +5,19 @@ import { galleryItems } from './gallery-items.js';
 // створили змінну, де записали посилання на <ul class="gallery"></ul>
 const galleryList = document.querySelector('.gallery');
 
+
+
 // markup - змінна для генерування списку li
 const markup = galleryItems
     .map((picture) =>
-        `<li class="gallery__item">
+    `<li class="gallery__item">
+    <a class="gallery__link" href="${picture.original}">
     <img class="gallery__image" 
     src="${picture.preview}" 
-    alt="${picture.description}">
+    alt="${picture.description}"
+    data-source="${picture.original}"
+    target="_parent">
+    </a>
     </li>`)
     .join("");
 
@@ -28,6 +34,8 @@ galleryList.addEventListener('click', handleClick);
 
 function handleClick(event) {
 
+    event.preventDefault();
+
     for (let i = 0; i < galleryItems.length; i += 1) {
         if (event.target.getAttribute('src') === galleryItems[i].preview) {
             const originalPicture = basicLightbox.create(`
@@ -39,6 +47,13 @@ function handleClick(event) {
     </div>
     `);
             originalPicture.show();
+
+            // додали закриття по натисканню Esc
+            document.body.addEventListener('keydown', event => {
+                if (event.code === 'Escape'){
+                    originalPicture.close();
+                }
+            })
         }
     }
 }
