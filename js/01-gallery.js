@@ -28,32 +28,17 @@ galleryList.addEventListener('click', handleClick);
 
 function handleClick(event) {
 
-    // console.log(event.target);
-
-    // console.log();
-
-
-    // const originalPicture = basicLightbox.create(`
-    // <div>
-    // <img class="gallery__image" 
-    // src="${event.target.src}" 
-    // alt="${event.target.description}">
-    // </div>
-    // `);
-
-    // originalPicture.show();
-
-
-    for (let i = 0; i < galleryItems.length; i += 1){
+    for (let i = 0; i < galleryItems.length; i += 1) {
         if (event.target.getAttribute('src') === galleryItems[i].preview) {
             const originalPicture = basicLightbox.create(`
     <div>
-    <img class="gallery__image" 
+    <img
     src="${galleryItems[i].original}" 
-    alt="${event.target.description}">
+    alt="${event.target.description}"
+    width="800" height="600">
     </div>
     `);
-    originalPicture.show();
+            originalPicture.show();
         }
     }
 }
